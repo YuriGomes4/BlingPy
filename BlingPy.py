@@ -12,40 +12,74 @@ class nota:
 
         self.json = requests.get(url, params=payload).json()
 
-        self.id = self.json['retorno']['notasfiscais'][0]['notafiscal']['id']
-        self.serie = self.json['retorno']['notasfiscais'][0]['notafiscal']['serie']
-        self.numero = self.json['retorno']['notasfiscais'][0]['notafiscal']['numero']
-        self.loja = self.json['retorno']['notasfiscais'][0]['notafiscal']['loja']
-        self.numeroPedidoLoja = self.json['retorno']['notasfiscais'][0]['notafiscal']['numeroPedidoLoja']
-        self.tipo = self.json['retorno']['notasfiscais'][0]['notafiscal']['tipo']
-        self.situacao = self.json['retorno']['notasfiscais'][0]['notafiscal']['situacao']
-        self.cliente = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']
-        self.cliente_nome = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['nome']
-        self.cliente_cnpj = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cnpj']
-        self.cliente_ie = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['ie']
-        self.cliente_rg = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['rg']
-        self.cliente_endereco = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['endereco']
-        self.cliente_numero = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['numero']
-        self.cliente_complemento = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['complemento']
-        self.cliente_cidade = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cidade']
-        self.cliente_bairro = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['bairro']
-        self.cliente_cep = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cep']
-        self.cliente_uf = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['uf']
-        self.cliente_email = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['email']
-        self.cliente_fone = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['fone']
-        self.contato = self.json['retorno']['notasfiscais'][0]['notafiscal']['contato']
-        self.cnpj = self.json['retorno']['notasfiscais'][0]['notafiscal']['cnpj']
-        self.vendedor = self.json['retorno']['notasfiscais'][0]['notafiscal']['vendedor']
-        self.dataEmissao = self.json['retorno']['notasfiscais'][0]['notafiscal']['dataEmissao']
-        self.valorNota = self.json['retorno']['notasfiscais'][0]['notafiscal']['valorNota']
-        self.chaveAcesso = self.json['retorno']['notasfiscais'][0]['notafiscal']['chaveAcesso']
-        self.xml = self.json['retorno']['notasfiscais'][0]['notafiscal']['xml']
-        self.linkDanfe = self.json['retorno']['notasfiscais'][0]['notafiscal']['linkDanfe']
-        self.linkPDF = self.json['retorno']['notasfiscais'][0]['notafiscal']['linkPDF']
-        self.codigoRastreamento = self.json['retorno']['notasfiscais'][0]['notafiscal']['codigoRastreamento']['codigoRastreamento']
-        self.cfops = self.json['retorno']['notasfiscais'][0]['notafiscal']['cfops'][0]
-        self.tipoIntegracao = self.json['retorno']['notasfiscais'][0]['notafiscal']['tipoIntegracao']
-        self.volume_id = self.json['retorno']['notasfiscais'][0]['notafiscal']['transporte']['volumes'][0]['volume']['id'][max]
+        try: self.id = self.json['retorno']['notasfiscais'][0]['notafiscal']['id'] 
+        except: self.id = "Sem informação"
+        try: self.serie = self.json['retorno']['notasfiscais'][0]['notafiscal']['serie'] 
+        except: self.serie = "Sem informação"
+        try: self.numero = self.json['retorno']['notasfiscais'][0]['notafiscal']['numero'] 
+        except: self.numero = "Sem informação"
+        try: self.loja = self.json['retorno']['notasfiscais'][0]['notafiscal']['loja'] 
+        except: self.loja = "Sem informação"
+        try: self.numeroPedidoLoja = self.json['retorno']['notasfiscais'][0]['notafiscal']['numeroPedidoLoja'] 
+        except: self.numeroPedidoLoja = "Sem informação"
+        try: self.tipo = self.json['retorno']['notasfiscais'][0]['notafiscal']['tipo'] 
+        except: self.tipo = "Sem informação"
+        try: self.situacao = self.json['retorno']['notasfiscais'][0]['notafiscal']['situacao'] 
+        except: self.situacao = "Sem informação"
+        try: self.cliente = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente'] 
+        except: self.cliente = "Sem informação"
+        try: self.cliente_nome = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['nome'] 
+        except: self.cliente_nome = "Sem informação"
+        try: self.cliente_cnpj = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cnpj'] 
+        except: self.cliente_cnpj = "Sem informação"
+        try: self.cliente_ie = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['ie'] 
+        except: self.cliente_ie = "Sem informação"
+        try: self.cliente_rg = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['rg'] 
+        except: self.cliente_rg = "Sem informação"
+        try: self.cliente_endereco = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['endereco'] 
+        except: self.cliente_endereco = "Sem informação"
+        try: self.cliente_numero = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['numero'] 
+        except: self.cliente_numero = "Sem informação"
+        try: self.cliente_complemento = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['complemento'] 
+        except: self.cliente_complemento = "Sem informação"
+        try: self.cliente_cidade = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cidade'] 
+        except: self.cliente_cidade = "Sem informação"
+        try: self.cliente_bairro = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['bairro'] 
+        except: self.cliente_bairro = "Sem informação"
+        try: self.cliente_cep = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cep'] 
+        except: self.cliente_cep = "Sem informação"
+        try: self.cliente_uf = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['uf'] 
+        except: self.cliente_uf = "Sem informação"
+        try: self.cliente_email = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['email'] 
+        except: self.cliente_email = "Sem informação"
+        try: self.cliente_fone = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['fone'] 
+        except: self.cliente_fone = "Sem informação"
+        try: self.contato = self.json['retorno']['notasfiscais'][0]['notafiscal']['contato'] 
+        except: self.contato = "Sem informação"
+        try: self.cnpj = self.json['retorno']['notasfiscais'][0]['notafiscal']['cnpj'] 
+        except: self.cnpj = "Sem informação"
+        try: self.vendedor = self.json['retorno']['notasfiscais'][0]['notafiscal']['vendedor'] 
+        except: self.vendedor = "Sem informação"
+        try: self.dataEmissao = self.json['retorno']['notasfiscais'][0]['notafiscal']['dataEmissao'] 
+        except: self.dataEmissao = "Sem informação"
+        try: self.valorNota = self.json['retorno']['notasfiscais'][0]['notafiscal']['valorNota'] 
+        except: self.valorNota = "Sem informação"
+        try: self.chaveAcesso = self.json['retorno']['notasfiscais'][0]['notafiscal']['chaveAcesso'] 
+        except: self.chaveAcesso = "Sem informação"
+        try: self.xml = self.json['retorno']['notasfiscais'][0]['notafiscal']['xml'] 
+        except: self.xml = "Sem informação"
+        try: self.linkDanfe = self.json['retorno']['notasfiscais'][0]['notafiscal']['linkDanfe'] 
+        except: self.linkDanfe = "Sem informação"
+        try: self.linkPDF = self.json['retorno']['notasfiscais'][0]['notafiscal']['linkPDF'] 
+        except: self.linkPDF = "Sem informação"
+        try: self.codigoRastreamento = self.json['retorno']['notasfiscais'][0]['notafiscal']['codigoRastreamento']['codigoRastreamento'] 
+        except: self.codigoRastreamento = "Sem informação"
+        try: self.cfops = self.json['retorno']['notasfiscais'][0]['notafiscal']['cfops'][0] 
+        except: self.cfops = "Sem informação"
+        try: self.tipoIntegracao = self.json['retorno']['notasfiscais'][0]['notafiscal']['tipoIntegracao'] 
+        except: self.tipoIntegracao = "Sem informação"
+        try: self.volume_id = self.json['retorno']['notasfiscais'][0]['notafiscal']['transporte']['volumes'][0]['volume']['id'][max] 
+        except: self.volume_id = "Sem informação"
     
     class filtroPedido:
 
@@ -55,40 +89,74 @@ class nota:
 
             self.json = requests.get(url, params=payload).json()
 
-            self.id = self.json['retorno']['notasfiscais'][0]['notafiscal']['id']
-            self.serie = self.json['retorno']['notasfiscais'][0]['notafiscal']['serie']
-            self.numero = self.json['retorno']['notasfiscais'][0]['notafiscal']['numero']
-            self.loja = self.json['retorno']['notasfiscais'][0]['notafiscal']['loja']
-            self.numeroPedidoLoja = self.json['retorno']['notasfiscais'][0]['notafiscal']['numeroPedidoLoja']
-            self.tipo = self.json['retorno']['notasfiscais'][0]['notafiscal']['tipo']
-            self.situacao = self.json['retorno']['notasfiscais'][0]['notafiscal']['situacao']
-            self.cliente = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']
-            self.cliente_nome = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['nome']
-            self.cliente_cnpj = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cnpj']
-            self.cliente_ie = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['ie']
-            self.cliente_rg = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['rg']
-            self.cliente_endereco = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['endereco']
-            self.cliente_numero = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['numero']
-            self.cliente_complemento = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['complemento']
-            self.cliente_cidade = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cidade']
-            self.cliente_bairro = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['bairro']
-            self.cliente_cep = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cep']
-            self.cliente_uf = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['uf']
-            self.cliente_email = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['email']
-            self.cliente_fone = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['fone']
-            self.contato = self.json['retorno']['notasfiscais'][0]['notafiscal']['contato']
-            self.cnpj = self.json['retorno']['notasfiscais'][0]['notafiscal']['cnpj']
-            self.vendedor = self.json['retorno']['notasfiscais'][0]['notafiscal']['vendedor']
-            self.dataEmissao = self.json['retorno']['notasfiscais'][0]['notafiscal']['dataEmissao']
-            self.valorNota = self.json['retorno']['notasfiscais'][0]['notafiscal']['valorNota']
-            self.chaveAcesso = self.json['retorno']['notasfiscais'][0]['notafiscal']['chaveAcesso']
-            self.xml = self.json['retorno']['notasfiscais'][0]['notafiscal']['xml']
-            self.linkDanfe = self.json['retorno']['notasfiscais'][0]['notafiscal']['linkDanfe']
-            self.linkPDF = self.json['retorno']['notasfiscais'][0]['notafiscal']['linkPDF']
-            self.codigoRastreamento = self.json['retorno']['notasfiscais'][0]['notafiscal']['codigoRastreamento']['codigoRastreamento']
-            self.cfops = self.json['retorno']['notasfiscais'][0]['notafiscal']['cfops'][0]
-            self.tipoIntegracao = self.json['retorno']['notasfiscais'][0]['notafiscal']['tipoIntegracao']
-            self.volume_id = self.json['retorno']['notasfiscais'][0]['notafiscal']['transporte']['volumes'][0]['volume']['id'][max]
+            try: self.id = self.json['retorno']['notasfiscais'][0]['notafiscal']['id'] 
+            except: self.id = "Sem informação"
+            try: self.serie = self.json['retorno']['notasfiscais'][0]['notafiscal']['serie'] 
+            except: self.serie = "Sem informação"
+            try: self.numero = self.json['retorno']['notasfiscais'][0]['notafiscal']['numero'] 
+            except: self.numero = "Sem informação"
+            try: self.loja = self.json['retorno']['notasfiscais'][0]['notafiscal']['loja'] 
+            except: self.loja = "Sem informação"
+            try: self.numeroPedidoLoja = self.json['retorno']['notasfiscais'][0]['notafiscal']['numeroPedidoLoja'] 
+            except: self.numeroPedidoLoja = "Sem informação"
+            try: self.tipo = self.json['retorno']['notasfiscais'][0]['notafiscal']['tipo'] 
+            except: self.tipo = "Sem informação"
+            try: self.situacao = self.json['retorno']['notasfiscais'][0]['notafiscal']['situacao'] 
+            except: self.situacao = "Sem informação"
+            try: self.cliente = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente'] 
+            except: self.cliente = "Sem informação"
+            try: self.cliente_nome = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['nome'] 
+            except: self.cliente_nome = "Sem informação"
+            try: self.cliente_cnpj = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cnpj'] 
+            except: self.cliente_cnpj = "Sem informação"
+            try: self.cliente_ie = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['ie'] 
+            except: self.cliente_ie = "Sem informação"
+            try: self.cliente_rg = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['rg'] 
+            except: self.cliente_rg = "Sem informação"
+            try: self.cliente_endereco = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['endereco'] 
+            except: self.cliente_endereco = "Sem informação"
+            try: self.cliente_numero = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['numero'] 
+            except: self.cliente_numero = "Sem informação"
+            try: self.cliente_complemento = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['complemento'] 
+            except: self.cliente_complemento = "Sem informação"
+            try: self.cliente_cidade = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cidade'] 
+            except: self.cliente_cidade = "Sem informação"
+            try: self.cliente_bairro = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['bairro'] 
+            except: self.cliente_bairro = "Sem informação"
+            try: self.cliente_cep = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cep'] 
+            except: self.cliente_cep = "Sem informação"
+            try: self.cliente_uf = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['uf'] 
+            except: self.cliente_uf = "Sem informação"
+            try: self.cliente_email = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['email'] 
+            except: self.cliente_email = "Sem informação"
+            try: self.cliente_fone = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['fone'] 
+            except: self.cliente_fone = "Sem informação"
+            try: self.contato = self.json['retorno']['notasfiscais'][0]['notafiscal']['contato'] 
+            except: self.contato = "Sem informação"
+            try: self.cnpj = self.json['retorno']['notasfiscais'][0]['notafiscal']['cnpj'] 
+            except: self.cnpj = "Sem informação"
+            try: self.vendedor = self.json['retorno']['notasfiscais'][0]['notafiscal']['vendedor'] 
+            except: self.vendedor = "Sem informação"
+            try: self.dataEmissao = self.json['retorno']['notasfiscais'][0]['notafiscal']['dataEmissao'] 
+            except: self.dataEmissao = "Sem informação"
+            try: self.valorNota = self.json['retorno']['notasfiscais'][0]['notafiscal']['valorNota'] 
+            except: self.valorNota = "Sem informação"
+            try: self.chaveAcesso = self.json['retorno']['notasfiscais'][0]['notafiscal']['chaveAcesso'] 
+            except: self.chaveAcesso = "Sem informação"
+            try: self.xml = self.json['retorno']['notasfiscais'][0]['notafiscal']['xml'] 
+            except: self.xml = "Sem informação"
+            try: self.linkDanfe = self.json['retorno']['notasfiscais'][0]['notafiscal']['linkDanfe'] 
+            except: self.linkDanfe = "Sem informação"
+            try: self.linkPDF = self.json['retorno']['notasfiscais'][0]['notafiscal']['linkPDF'] 
+            except: self.linkPDF = "Sem informação"
+            try: self.codigoRastreamento = self.json['retorno']['notasfiscais'][0]['notafiscal']['codigoRastreamento']['codigoRastreamento'] 
+            except: self.codigoRastreamento = "Sem informação"
+            try: self.cfops = self.json['retorno']['notasfiscais'][0]['notafiscal']['cfops'][0] 
+            except: self.cfops = "Sem informação"
+            try: self.tipoIntegracao = self.json['retorno']['notasfiscais'][0]['notafiscal']['tipoIntegracao'] 
+            except: self.tipoIntegracao = "Sem informação"
+            try: self.volume_id = self.json['retorno']['notasfiscais'][0]['notafiscal']['transporte']['volumes'][0]['volume']['id'][max] 
+            except: self.volume_id = "Sem informação"
 
 class pedidos:
 
@@ -215,9 +283,12 @@ class pedido:
 
         self.json = requests.get(url, params=payload).json()
 
-        self.desconto = self.json['retorno']['pedidos'][0]['pedido']['desconto']
-        self.numeroPedidoLoja = self.json['retorno']['pedidos'][0]['pedido']['numeroPedidoLoja']
-        self.data = self.json['retorno']['pedidos'][0]['pedido']['data']
+        try: self.desconto = self.json['retorno']['pedidos'][0]['pedido']['desconto']
+        except: self.desconto = "Sem informação"
+        try: self.numeroPedidoLoja = self.json['retorno']['pedidos'][0]['pedido']['numeroPedidoLoja']
+        except: self.numeroPedidoLoja = "Sem informação"
+        try: self.data = self.json['retorno']['pedidos'][0]['pedido']['data']
+        except: self.data = "Sem informação"
 
 class produtos:
 
@@ -227,7 +298,7 @@ class produtos:
 
         self.json = requests.get(url, params=payload).json()
 
-class produto(object):
+class produto:
 
     def __init__(self, sku):
         url = f"https://bling.com.br/Api/v2/produto/{sku}/json/"
@@ -237,8 +308,13 @@ class produto(object):
 
         self.json = requests.get(url, params=payload).json()
 
-        self.imagens = self.json['retorno']['produtos'][0]['produto']['imagem']
-        self.sku = self.json['retorno']['produtos'][0]['produto']['codigo']
-        self.titulo = self.json['retorno']['produtos'][0]['produto']['descricao']
-        self.condicao = self.json['retorno']['produtos'][0]['produto']['condicao']
-        self.marca = self.json['retorno']['produtos'][0]['produto']['marca']
+        try: self.imagens = self.json['retorno']['produtos'][0]['produto']['imagem']
+        except: self.imagens = "Sem informação"
+        try: self.sku = self.json['retorno']['produtos'][0]['produto']['codigo']
+        except: self.sku = "Sem informação"
+        try: self.titulo = self.json['retorno']['produtos'][0]['produto']['descricao']
+        except: self.titulo = "Sem informação"
+        try: self.condicao = self.json['retorno']['produtos'][0]['produto']['condicao']
+        except: self.condicao = "Sem informação"
+        try: self.marca = self.json['retorno']['produtos'][0]['produto']['marca']
+        except: self.marca = "Sem informação"
