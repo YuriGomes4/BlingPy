@@ -1,359 +1,244 @@
-from ast import arg
-#from asyncio.windows_events import NULL
-from certifi import where
 import requests
 
-KeyApi = ""
+ApiKey = ""
 
-def ApiKey(keyy):
-    global KeyApi
-    KeyApi = keyy
-
-class notasFiltroPedido(object):
-    #nota = NULL
-
-    def __init__(self,numero):
-        self.numero = numero
-        #self.serie = serie
-        url = f"https://bling.com.br/Api/v2/notasfiscais/json/"
-        payload = {"filters": f"numeroPedidoLoja[{self.numero}]", "apikey": KeyApi}
-
-        self.nota = requests.get(url, params=payload)
-        #print(self.nota.json())
-
-    def id(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['id']
-    def serie(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['serie']
-    def numero(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['numero']
-    def loja(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['loja']
-    def numeroPedidoLoja(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['numeroPedidoLoja']
-    def tipo(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['tipo']
-    def situacao(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['situacao']
-    def cliente(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']
-    def cliente_nome(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['nome']
-    def cliente_cnpj(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cnpj']
-    def cliente_ie(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['ie']
-    def cliente_rg(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['rg']
-    def cliente_endereco(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['endereco']
-    def cliente_numero(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['numero']
-    def cliente_complemento(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['complemento']
-    def cliente_cidade(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cidade']
-    def cliente_bairro(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['bairro']
-    def cliente_cep(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cep']
-    def cliente_uf(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['uf']
-    def cliente_email(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['email']
-    def cliente_fone(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['fone']
-    def contato(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['contato']
-    def cnpj(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cnpj']
-    def vendedor(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['vendedor']
-    def dataEmissao(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['dataEmissao']
-    def valorNota(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['valorNota']
-    def chaveAcesso(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['chaveAcesso']
-    def xml(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['xml']
-    def linkDanfe(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['linkDanfe']
-    def linkPDF(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['linkPDF']
-    def codigoRastreamento(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['codigoRastreamento']['codigoRastreamento']
-    def cfops(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cfops'][0]
-    def tipoIntegracao(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['tipoIntegracao']
-    def volume_id(self,):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['transporte']['volumes'][0]['volume']['id'][max]
-
-    def teste(self):
-        print(self.nota.content)
-
-    def teste2(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['numero']
-
-class nota(object):
-
-    #nota = NULL
+class nota:
 
     def __init__(self,numero,serie):
         self.numero = numero
         self.serie = serie
         url = f"https://bling.com.br/Api/v2/notafiscal/{self.numero}/{self.serie}/json/"
-        payload = {"apikey": KeyApi}
+        payload = {"apikey": ApiKey}
 
-        self.nota = requests.get(url, params=payload)
+        self.json = requests.get(url, params=payload).json()
 
-    #region - Atributos nota
+        self.id = self.json['retorno']['notasfiscais'][0]['notafiscal']['id']
+        self.serie = self.json['retorno']['notasfiscais'][0]['notafiscal']['serie']
+        self.numero = self.json['retorno']['notasfiscais'][0]['notafiscal']['numero']
+        self.loja = self.json['retorno']['notasfiscais'][0]['notafiscal']['loja']
+        self.numeroPedidoLoja = self.json['retorno']['notasfiscais'][0]['notafiscal']['numeroPedidoLoja']
+        self.tipo = self.json['retorno']['notasfiscais'][0]['notafiscal']['tipo']
+        self.situacao = self.json['retorno']['notasfiscais'][0]['notafiscal']['situacao']
+        self.cliente = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']
+        self.cliente_nome = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['nome']
+        self.cliente_cnpj = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cnpj']
+        self.cliente_ie = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['ie']
+        self.cliente_rg = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['rg']
+        self.cliente_endereco = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['endereco']
+        self.cliente_numero = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['numero']
+        self.cliente_complemento = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['complemento']
+        self.cliente_cidade = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cidade']
+        self.cliente_bairro = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['bairro']
+        self.cliente_cep = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cep']
+        self.cliente_uf = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['uf']
+        self.cliente_email = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['email']
+        self.cliente_fone = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['fone']
+        self.contato = self.json['retorno']['notasfiscais'][0]['notafiscal']['contato']
+        self.cnpj = self.json['retorno']['notasfiscais'][0]['notafiscal']['cnpj']
+        self.vendedor = self.json['retorno']['notasfiscais'][0]['notafiscal']['vendedor']
+        self.dataEmissao = self.json['retorno']['notasfiscais'][0]['notafiscal']['dataEmissao']
+        self.valorNota = self.json['retorno']['notasfiscais'][0]['notafiscal']['valorNota']
+        self.chaveAcesso = self.json['retorno']['notasfiscais'][0]['notafiscal']['chaveAcesso']
+        self.xml = self.json['retorno']['notasfiscais'][0]['notafiscal']['xml']
+        self.linkDanfe = self.json['retorno']['notasfiscais'][0]['notafiscal']['linkDanfe']
+        self.linkPDF = self.json['retorno']['notasfiscais'][0]['notafiscal']['linkPDF']
+        self.codigoRastreamento = self.json['retorno']['notasfiscais'][0]['notafiscal']['codigoRastreamento']['codigoRastreamento']
+        self.cfops = self.json['retorno']['notasfiscais'][0]['notafiscal']['cfops'][0]
+        self.tipoIntegracao = self.json['retorno']['notasfiscais'][0]['notafiscal']['tipoIntegracao']
+        self.volume_id = self.json['retorno']['notasfiscais'][0]['notafiscal']['transporte']['volumes'][0]['volume']['id'][max]
+    
+    class filtroPedido:
 
-    def id(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['id']
-    def serie(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['serie']
-    def numero(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['numero']
-    def loja(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['loja']
-    def numeroPedidoLoja(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['numeroPedidoLoja']
-    def tipo(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['tipo']
-    def situacao(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['situacao']
-    def cliente(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']
-    def cliente_nome(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['nome']
-    def cliente_cnpj(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cnpj']
-    def cliente_ie(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['ie']
-    def cliente_rg(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['rg']
-    def cliente_endereco(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['endereco']
-    def cliente_numero(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['numero']
-    def cliente_complemento(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['complemento']
-    def cliente_cidade(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cidade']
-    def cliente_bairro(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['bairro']
-    def cliente_cep(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cep']
-    def cliente_uf(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['uf']
-    def cliente_email(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['email']
-    def cliente_fone(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cliente']['fone']
-    def contato(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['contato']
-    def cnpj(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cnpj']
-    def vendedor(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['vendedor']
-    def dataEmissao(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['dataEmissao']
-    def valorNota(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['valorNota']
-    def chaveAcesso(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['chaveAcesso']
-    def xml(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['xml']
-    def linkDanfe(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['linkDanfe']
-    def linkPDF(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['linkPDF']
-    def codigoRastreamento(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['codigoRastreamento']['codigoRastreamento']
-    def cfops(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['cfops'][0]
-    def tipoIntegracao(self):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['tipoIntegracao']
-    def volume_id(self,):
-        return self.nota.json()['retorno']['notasfiscais'][0]['notafiscal']['transporte']['volumes'][0]['volume']['id'][max]
+        def __init__(self,numero):
+            url = f"https://bling.com.br/Api/v2/notasfiscais/json/"
+            payload = {"filters": f"numeroPedidoLoja[{numero}]", "apikey": ApiKey}
 
-    #endregion
+            self.json = requests.get(url, params=payload).json()
 
-    def teste(self):
-        print(self.nota.content)
+            self.id = self.json['retorno']['notasfiscais'][0]['notafiscal']['id']
+            self.serie = self.json['retorno']['notasfiscais'][0]['notafiscal']['serie']
+            self.numero = self.json['retorno']['notasfiscais'][0]['notafiscal']['numero']
+            self.loja = self.json['retorno']['notasfiscais'][0]['notafiscal']['loja']
+            self.numeroPedidoLoja = self.json['retorno']['notasfiscais'][0]['notafiscal']['numeroPedidoLoja']
+            self.tipo = self.json['retorno']['notasfiscais'][0]['notafiscal']['tipo']
+            self.situacao = self.json['retorno']['notasfiscais'][0]['notafiscal']['situacao']
+            self.cliente = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']
+            self.cliente_nome = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['nome']
+            self.cliente_cnpj = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cnpj']
+            self.cliente_ie = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['ie']
+            self.cliente_rg = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['rg']
+            self.cliente_endereco = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['endereco']
+            self.cliente_numero = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['numero']
+            self.cliente_complemento = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['complemento']
+            self.cliente_cidade = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cidade']
+            self.cliente_bairro = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['bairro']
+            self.cliente_cep = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['cep']
+            self.cliente_uf = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['uf']
+            self.cliente_email = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['email']
+            self.cliente_fone = self.json['retorno']['notasfiscais'][0]['notafiscal']['cliente']['fone']
+            self.contato = self.json['retorno']['notasfiscais'][0]['notafiscal']['contato']
+            self.cnpj = self.json['retorno']['notasfiscais'][0]['notafiscal']['cnpj']
+            self.vendedor = self.json['retorno']['notasfiscais'][0]['notafiscal']['vendedor']
+            self.dataEmissao = self.json['retorno']['notasfiscais'][0]['notafiscal']['dataEmissao']
+            self.valorNota = self.json['retorno']['notasfiscais'][0]['notafiscal']['valorNota']
+            self.chaveAcesso = self.json['retorno']['notasfiscais'][0]['notafiscal']['chaveAcesso']
+            self.xml = self.json['retorno']['notasfiscais'][0]['notafiscal']['xml']
+            self.linkDanfe = self.json['retorno']['notasfiscais'][0]['notafiscal']['linkDanfe']
+            self.linkPDF = self.json['retorno']['notasfiscais'][0]['notafiscal']['linkPDF']
+            self.codigoRastreamento = self.json['retorno']['notasfiscais'][0]['notafiscal']['codigoRastreamento']['codigoRastreamento']
+            self.cfops = self.json['retorno']['notasfiscais'][0]['notafiscal']['cfops'][0]
+            self.tipoIntegracao = self.json['retorno']['notasfiscais'][0]['notafiscal']['tipoIntegracao']
+            self.volume_id = self.json['retorno']['notasfiscais'][0]['notafiscal']['transporte']['volumes'][0]['volume']['id'][max]
 
-    def json(self):
-        return self.nota.content
+class pedidos:
 
-class pedidos(object):
-
-    #Tudo = NULL
-
-    def __init__(self, filtro="none", valor="0"):
-        print(filtro)
+    def __init__(self):
         url = f"https://bling.com.br/Api/v2/pedidos/page=1/json/"
-        if filtro == "situacao":
-            payload = {"apikey": KeyApi, "filters":f"idSituacao[{valor}]"}
-        else:
-            payload = {"apikey": KeyApi}
+        payload = {"apikey": ApiKey}
 
-        pedidos = requests.get(url, params=payload)
+        #pedidos = requests.get(url, params=payload)
+        #self.Tudo = pedidos.json()['retorno']['pedidos']
 
-        #global Tudo
-        self.Tudo = pedidos.json()['retorno']['pedidos']
+        self.json = requests.get(url, params=payload).json()
+        self.pedidos = self.json['retorno']['pedidos']
 
         ind = 1
-        while (len(pedidos.json()['retorno']['pedidos']) == 100):
+        while (len(self.json['retorno']['pedidos']) == 100):
             ind = ind + 1
             url = f"https://bling.com.br/Api/v2/pedidos/page={ind}/json/"
 
-            pedidos = requests.get(url, params=payload)
-            self.Tudo = self.Tudo + pedidos.json()['retorno']['pedidos']
+            self.json = requests.get(url, params=payload).json()
+            self.pedidos = self.pedidos + self.json['retorno']['pedidos']
 
     def numero(self):
         numero = []
-        for item in self.Tudo:
-            numero.append(item['pedido']['numero'])
+        for item in self.pedidos:
+            try:
+                numero.append(item['pedido']['numero'])
+            except:
+                numero.append("Sem informação")
 
         return numero
 
     def numeroPedidoLoja(self):
         numeroPedidoLoja = []
-        for item in self.Tudo:
+        for item in self.pedidos:
             try:
                 numeroPedidoLoja.append(item['pedido']['numeroPedidoLoja'])
             except:
-                numeroPedidoLoja.append("Sem número")
+                numeroPedidoLoja.append("Sem informação")
 
         return numeroPedidoLoja
 
     def data(self):
-        #global Tudo
-        #self.Tudo
         data = []
-        for item in self.Tudo:
-            data.append(item['pedido']['data'])
+        for item in self.pedidos:
+            try:
+                data.append(item['pedido']['data'])
+            except:
+                data.append("Sem informação")
 
         return data
 
-    def json(self):
-        #global Tudo
-        return self.Tudo
+    class filtro_idSituacao:
 
-    def pagina(self, pag):
-        print(str(pag))
-        url = f"https://bling.com.br/Api/v2/pedidos/page={str(pag)}/json/"
-        payload = {"apikey": KeyApi}
+        def __init__(self, valor):
 
-        pedidos = requests.get(url, params=payload)
+            tabelaSit = """
+            ID   ID_Herdado   Nome              Cor
+            -------------------------------------------
+            6    0            Em aberto         #E9DC40
+            9    0            Atendido          #3FB57A
+            12   0            Cancelado         #CBCBCB
+            15   0            Em andamento      #0065F9
+            18   0            Venda Agenciada   #FF7835
+            21   0            Em digitação      #FF66E3
+            24   0            Verificado        #85F39E
+            """
 
-        #global Tudo
-        Tudo = pedidos.json()['retorno']['pedidos']
+            valores = ["6", "9", "12", "15", "18", "21", "24"]
 
-        return Tudo
+            if valor in valores:
+                url = f"https://bling.com.br/Api/v2/pedidos/page=1/json/"
+                payload = {"apikey": ApiKey, "filters":f"idSituacao[{valor}]"}
 
-    def situacao(self, situacao):
-        url = f"https://bling.com.br/Api/v2/pedidos/page=1/json/"
-        payload = {"apikey": KeyApi, "filters":f"idSituacao[{situacao}]"}
+                self.json = requests.get(url, params=payload).json()
+                self.pedidos = self.json['retorno']['pedidos']
 
-        self.pedidos = requests.get(url, params=payload)
+                ind = 1
+                while (len(self.json['retorno']['pedidos']) == 100):
+                    ind = ind + 1
+                    url = f"https://bling.com.br/Api/v2/pedidos/page={ind}/json/"
 
-        #global Tudo
-        self.Tudo = self.pedidos.json()['retorno']['pedidos']
+                    self.json = requests.get(url, params=payload).json()
+                    self.pedidos = self.pedidos + self.json['retorno']['pedidos']
+            else:
+                print("Situação incorreta, valores permitidos: " + tabelaSit)
+                self.pedidos = []
+                self.json = ""
 
-        ind = 1
-        while (len(self.pedidos.json()['retorno']['pedidos']) == 100):
-            ind = ind + 1
-            url = f"https://bling.com.br/Api/v2/pedidos/page={ind}/json/"
+        def numero(self):
+            numero = []
+            for item in self.pedidos:
+                try:
+                    numero.append(item['pedido']['numero'])
+                except:
+                    numero.append("Sem informação")
 
-            self.pedidos = requests.get(url, params=payload)
-            self.Tudo = self.Tudo + self.pedidos.json()['retorno']['pedidos']
+            return numero
 
-        return self.Tudo
+        def numeroPedidoLoja(self):
+            numeroPedidoLoja = []
+            for item in self.pedidos:
+                try:
+                    numeroPedidoLoja.append(item['pedido']['numeroPedidoLoja'])
+                except:
+                    numeroPedidoLoja.append("Sem informação")
 
-class pedido(object):
+            return numeroPedidoLoja
+
+        def data(self):
+            data = []
+            for item in self.pedidos:
+                try:
+                    data.append(item['pedido']['data'])
+                except:
+                    data.append("Sem informação")
+
+            return data
+
+class pedido:
 
     def __init__(self, numero):
-        self.numero = numero
-        url = f"https://bling.com.br/Api/v2/pedido/{self.numero}/json/"
-        payload = {"apikey": KeyApi}
+        url = f"https://bling.com.br/Api/v2/pedido/{numero}/json/"
+        payload = {"apikey": ApiKey}
 
-        self.pedido = requests.get(url, params=payload)
+        self.json = requests.get(url, params=payload).json()
 
-    def desconto(self):
-        return self.pedido.json()['retorno']['pedidos'][0]['pedido']['desconto']
+        self.desconto = self.json['retorno']['pedidos'][0]['pedido']['desconto']
+        self.numeroPedidoLoja = self.json['retorno']['pedidos'][0]['pedido']['numeroPedidoLoja']
+        self.data = self.json['retorno']['pedidos'][0]['pedido']['data']
 
-    def numeroPedidoLoja(self):
-        return self.pedido.json()['retorno']['pedidos'][0]['pedido']['numeroPedidoLoja']
-
-    def data(self):
-        return self.pedido.json()['retorno']['pedidos'][0]['pedido']['data']
-
-    def json(self):
-        return self.pedido.json()
-
-class produtos(object):
-
-    #All = NULL
-
-    def __init__(self):
-        url = f"https://bling.com.br/Api/v2/produto/DS4-ORANGE/json/"
-        payload = {"apikey": KeyApi}
-
-        self.produtos = requests.get(url, params=payload)
-
-        global All
-        All = self.produtos.json()['retorno']['produtos']
-
-        #ind = 1
-        #while (len(self.pedidos.json()['retorno']['pedidos']) == 100):
-        #    ind = ind + 1
-        #    url = f"https://bling.com.br/Api/v2/pedidos/page={ind}/json/"
-        #    payload = {"apikey": KeyApi}
-
-        #    self.pedidos = requests.get(url, params=payload)
-        #    All = All + self.pedidos.json()['retorno']['pedidos']
-
-    def todos(self):
-        return All
-
-class produto(object):
-
-    #All = NULL
+class produtos:
 
     def __init__(self, sku):
         url = f"https://bling.com.br/Api/v2/produto/{sku}/json/"
-        payload = {"apikey": KeyApi, "imagem": "S"}
+        payload = {"apikey": ApiKey}
+
+        self.json = requests.get(url, params=payload).json()
+
+class produto(object):
+
+    def __init__(self, sku):
+        url = f"https://bling.com.br/Api/v2/produto/{sku}/json/"
+        payload = {"apikey": ApiKey, "imagem": "S"}
 
         #https://bling.com.br/Api/v2/produto/{sku}/json?apikey=keyyy&imagem=S
 
-        self.produtos = requests.get(url, params=payload)
+        self.json = requests.get(url, params=payload).json()
 
-        global All
-        All = self.produtos.json()
-
-        while str(All).replace("{", "").replace("}", "") == "'retorno': 'erros': 'erro': 'cod': 18, 'msg': 'O limite de requisições por segundo foi atingido, tente novamente mais tarde.'":
-            self.produtos = requests.get(url, params=payload)
-            All = self.produtos.json()
-
-    def tudo(self):
-        #print(str(All))
-        return All
-
-    def imagens(self):
-        lista = []
-        for im in All['retorno']['produtos'][0]['produto']['imagem']:
-            lista.append(im['link'])
-        return lista
-    def sku(self):
-        return All['retorno']['produtos'][0]['produto']['codigo']
-    def titulo(self):
-        return All['retorno']['produtos'][0]['produto']['descricao']
-    def condicao(self):
-        return All['retorno']['produtos'][0]['produto']['condicao']
-    def marca(self):
-        return All['retorno']['produtos'][0]['produto']['marca']
-    def imagem(self, ind):
-        return All['retorno']['produtos'][0]['produto']['imagem'][f'{ind}']['link']
+        self.imagens = self.json['retorno']['produtos'][0]['produto']['imagem']
+        self.sku = self.json['retorno']['produtos'][0]['produto']['codigo']
+        self.titulo = self.json['retorno']['produtos'][0]['produto']['descricao']
+        self.condicao = self.json['retorno']['produtos'][0]['produto']['condicao']
+        self.marca = self.json['retorno']['produtos'][0]['produto']['marca']
