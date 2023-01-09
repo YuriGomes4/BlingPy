@@ -1,5 +1,5 @@
 import BlingPy as bling
 
-bling.ApiKey = "a60fc910ea16562c2dce4ee3b26d3d4e8e8922d4eab83886429babb1fc1f271c42339aab"
+bling.ApiKey = "6de73395e08365e5310dcba48978133e07323b3e17b7323a703e5dacb40a9ac1ddaf507a"
 
-print(bling.nota("57", "4").chaveAcesso)
+print(bling.produto.atualizar("SW-A6-VM").json)

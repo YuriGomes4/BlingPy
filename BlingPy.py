@@ -318,3 +318,38 @@ class produto:
         except: self.condicao = "Sem informação"
         try: self.marca = self.json['retorno']['produtos'][0]['produto']['marca']
         except: self.marca = "Sem informação"
+
+    class atualizar:
+
+        def __init__(self, sku):
+            xmll = '''<?xml version="1.0" encoding="UTF-8"?><produto><codigo>SW-A6-VM</codigo><descricao>SmartWatch A6 (Liso) Vermelhoaaaaa</descricao><estoque>10.00</estoque><deposito><id>14886556851</id><estoque>200</estoque></deposito>'''
+
+            from xml.dom import minidom
+
+            #cria documento
+            doc = minidom.Document()
+
+            #cria raiz e adicionar no documento
+            raiz = doc.createElement('produto')
+            doc.appendChild(raiz)
+
+            #cria itens e adiciona na raiz
+            #cod = doc.createElement('codigo')
+            #desc = doc.createElement('descricao')
+            esto = doc.createElement('estoque')
+            #cod.appendChild(doc.createTextNode('SW-A6-VM'))
+            #desc.appendChild(doc.createTextNode('SmartWatch A6 (Liso) VermelhoAAAAA'))
+            esto.appendChild(doc.createTextNode('3.00'))
+            #raiz.appendChild(cod)
+            #raiz.appendChild(desc)
+            raiz.appendChild(esto)
+
+            #xmldoc = minidom.Document()
+            print(raiz.toprettyxml())
+            #print(doc)
+
+            url = f"https://bling.com.br/Api/v2/produto/{sku}/json/"
+            payload = {"apikey": ApiKey, "xml": raiz.toprettyxml()}
+            #payload = {"apikey": ApiKey}
+
+            self.json = requests.post(url, params=payload).json()
