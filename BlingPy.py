@@ -321,8 +321,8 @@ class produto:
 
     class atualizar:
 
-        def __init__(self, sku):
-            xmll = '''<?xml version="1.0" encoding="UTF-8"?><produto><codigo>SW-A6-VM</codigo><descricao>SmartWatch A6 (Liso) Vermelhoaaaaa</descricao><estoque>10.00</estoque><deposito><id>14886556851</id><estoque>200</estoque></deposito>'''
+        def __init__(self, sku, estoque):
+            #xmll = '''<?xml version="1.0" encoding="UTF-8"?><produto><codigo>SW-A6-VM</codigo><descricao>SmartWatch A6 (Liso) Vermelhoaaaaa</descricao><estoque>10.00</estoque><deposito><id>14886556851</id><estoque>200</estoque></deposito>'''
 
             from xml.dom import minidom
 
@@ -339,7 +339,7 @@ class produto:
             esto = doc.createElement('estoque')
             #cod.appendChild(doc.createTextNode('SW-A6-VM'))
             #desc.appendChild(doc.createTextNode('SmartWatch A6 (Liso) VermelhoAAAAA'))
-            esto.appendChild(doc.createTextNode('3.00'))
+            esto.appendChild(doc.createTextNode(str(estoque)))
             #raiz.appendChild(cod)
             #raiz.appendChild(desc)
             raiz.appendChild(esto)
@@ -353,3 +353,15 @@ class produto:
             #payload = {"apikey": ApiKey}
 
             self.json = requests.post(url, params=payload).json()
+
+            try:
+                self.json['retorno']['produtos'][0]['produto']['codigo']
+            except:
+                self.resultado = "erro"
+            else:
+                if self.json['retorno']['produtos'][0]['produto']['codigo'] == sku:
+                    self.resultado = "sucesso"
+                else:
+                    self.resultado = "erro"
+
+            #return self.json
